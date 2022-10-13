@@ -3,56 +3,75 @@ package games;
 import java.util.Scanner;
 
 public class RockPaperScissors {
-    Player player;
-    Fist alFist;
 
-    RockPaperScissors (String playName, int playerScore) {
+    Player player ;
+    Fist aIFist;
 
-        player = new Player(playName, playerScore);
-        alFist = new Fist();
+    //constructor: anropas med new constructor in i
+    RockPaperScissors(String playerName, int playerScore) {
+        player = new Player("lucas", 0);
+        aIFist = new Fist();
     }
-    void playGame ()
-    {
-
-        System.out.println(player.getName());
-        System.out.println(player.toString());
-    }
-
     public static void main(String[] args) {
+        RockPaperScissors game = new RockPaperScissors("lucas", 0);
+        game.playGame();
+    }
+    void playGame() {
+        int score1=0; //player
+        int score2=0; //aIFist
+        for (int i=0; i<3; i++) {
+            Scanner scanner = new Scanner(System.in);
+            System.out.println("Rock, paper, scissors");
+            String choice=scanner.nextLine();
+            String stringresult="";
+            int intresult=aIFist.play();
 
-        Scanner scanner = new Scanner(System.in);
 
-        System.out.println("Rock, paper, scissor");
-        String playerMove=scanner.nextLine();
-
-        int randomNumer = scanner.nextByte();
-
-        String computerMove;
-
-        if(randomNumer== 0){
-            computerMove="ROCK";}
-        else if(randomNumer == 1){
-            computerMove = "PAPER";
+            if(intresult== Fist.ROCK){
+                stringresult="ROCK";
+            }
+            if(intresult== Fist.PAPER){
+                stringresult="PAPER";
+            }
+            if(intresult== Fist.SCISSORS){
+                stringresult="SCISSORS";
+            }
+            if(choice.equalsIgnoreCase("Rock")&&stringresult.equalsIgnoreCase("ROCK")){
+                System.out.println("Du valde " +choice+ " och "+ "datorn gav "+ stringresult + " då oavgjort");
+                score1++; score2++;
+            }if(choice.equalsIgnoreCase("Rock")&&stringresult.equalsIgnoreCase("PAPER")){
+                System.out.println("Du valde " +choice+ " och "+"datorn gav "+ stringresult + " då datorn vann");
+                score2++;
+            }if(choice.equalsIgnoreCase("Rock")&&stringresult.equalsIgnoreCase("SCISSORS")){
+                System.out.println("Du valde " +choice+ " och "+ "datorn gav "+ stringresult + " då du vann");
+                score1++;
+            }if(choice.equalsIgnoreCase("Paper")&&stringresult.equalsIgnoreCase("PAPER")){
+                System.out.println("Du valde " +choice+ " och "+ "datorn gav "+ stringresult + " då oavgjort");
+                score1++; score2++;
+            }if(choice.equalsIgnoreCase("Paper")&&stringresult.equalsIgnoreCase("ROCK")){
+                System.out.println("Du valde " +choice+ " och "+ "datorn gav "+ stringresult + " då du vann");
+                score1++;
+            }if(choice.equalsIgnoreCase("Paper")&&stringresult.equalsIgnoreCase("SCISSORS")){
+                System.out.println("Du valde " +choice+ " och "+ "datorn gav "+ stringresult +" då datorn vann");
+                score2++;
+            }if(choice.equalsIgnoreCase("Scissors")&&stringresult.equalsIgnoreCase("SCISSORS")){
+                System.out.println("Du valde " +choice+ " och "+ "datorn gav "+ stringresult + " då oavgjort");
+                score1++; score2++;
+            }if(choice.equalsIgnoreCase("Scissors")&&stringresult.equalsIgnoreCase("ROCK")){
+                System.out.println("Du valde " +choice+ " och "+ "datorn gav "+ stringresult+" då datorn vann");
+                score2++;
+            }if(choice.equalsIgnoreCase("Scissors")&&stringresult.equalsIgnoreCase("PAPER")){
+                System.out.println("Du valde " +choice+ " och "+ "datorn gav "+ stringresult + " då du vann");
+                score1++;
+            }
+        }if(score1>score2){
+            System.out.println("Resultat; Du van");
         }
-        else {
-            computerMove ="SCISSORS";
+        else if (score2>score1){
+            System.out.println("Resultat; Datorn vann");
+        }else{
+            System.out.println("Resultat; oavgjort");
         }
-        System.out.println("Computer chose" + computerMove + "!");
 
-        // print results
-
-        if(playerMove.equals(computerMove)) {
-            System.out.println("Oavgjort");
-        }
-        else if(computerChose(playerMove, computerMove)){
-            System.out.println("Player wins!");
-        } else {
-            System.out.print ("Computer wins!");
-
-
-        }
     }
 }
-
-
-
